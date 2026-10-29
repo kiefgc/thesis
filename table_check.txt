@@ -1,0 +1,8 @@
+tasks_pro266.csv: rows=266 (expected 266) empty_issue_text=0
+  kimi solved=149  opus solved=158  either=188  neither=78
+  spend kimi-all=$28.23  opus-all=$201.25  kimi-first-then-opus=$143.77
+  expected for pro266: kimi 149, opus 158, either 188, neither 78, spend 28.23 / 201.25 / 143.77
+tasks_label100.csv: rows=100 (expected 100) empty_issue_text=0
+  kimi solved=52  opus solved=48  either=60  neither=40
+  spend kimi-all=$20.78  opus-all=$78.34  kimi-first-then-opus=$60.81
+pro266 tasks with no extracted issue text: 0
