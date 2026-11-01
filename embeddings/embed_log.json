@@ -1,0 +1,31 @@
+{
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "max_seq_length": 4096,
+  "device": "cpu",
+  "dtype": "float32",
+  "normalize": true,
+  "batch_size": 2,
+  "prompt": null,
+  "versions": {
+    "python": "3.13.7",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.22.1",
+    "sentence_transformers": "6.2.0",
+    "numpy": "2.5.4"
+  },
+  "files": {
+    "tasks_pro266.csv": {
+      "input_sha256": "9D4E96BA3375FA08A5BCD3E6187E1F63411BED459AF9F87FD716469B57D654D5",
+      "n": 266,
+      "seconds": 883.3,
+      "embeddings_sha256": "20CE8147FA596276B7A6501A042234C9536BC989ED14908A1051FC5D9F91C89E"
+    },
+    "tasks_label100.csv": {
+      "input_sha256": "62990EDEB7EFC45A267110B24B902566CE07677D1972790F4BD31E1EE404AD4C",
+      "n": 100,
+      "seconds": 385.0,
+      "embeddings_sha256": "CA655F47D17BAC6C3D8991BC06CB8D334842D2789915FD34342DE1059C0843EF"
+    }
+  }
+}
