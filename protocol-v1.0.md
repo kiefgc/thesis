@@ -118,7 +118,7 @@ Any change after the commit is written below with its date and reason, and the a
 
 | Date | Change | Reason | Analyses affected |
 |---|---|---|---|
-| | | | |
+| 1 November 2026 | Procedural record, not an analysis change. The secondary variant's embeddings were computed once by `embed_all.py` on CPU in float32, with Qwen3-Embedding-0.6B at revision 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3, maximum length 4096, L2-normalised, plain issue text, no prefix, batch size 2. Versions: Python 3.13.7, torch 2.15.0+cpu, transformers 5.22.1, sentence-transformers 6.2.0, numpy 2.5.4. Input hashes matched the frozen tables. Output hashes: Pro 266 `20CE8147FA596276B7A6501A042234C9536BC989ED14908A1051FC5D9F91C89E`, Label 100 `CA655F47D17BAC6C3D8991BC06CB8D334842D2789915FD34342DE1059C0843EF`. Run time 883 s and 385 s. An earlier smoke test on 10 and 3 texts used bfloat16 and then float32; its outputs were not kept or used. | The protocol named the embedding model and settings but not the precision, device or library versions, which affect the numbers slightly. Recording them makes the run repeatable. | Secondary embedding variant only. No feature, label, threshold, metric or baseline changed. |
 
 ## Sources
 
