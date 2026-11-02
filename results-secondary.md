@@ -1,0 +1,65 @@
+# Secondary analysis: embedding Advisor (protocol v1.0)
+
+266 tasks, 20 repetitions of stratified 5-fold, seed 42, 10000 bootstrap resamples. f = 0 (no false-solve correction). My arithmetic.
+
+## 1. Policies (primary analysis)
+
+| Policy | Spend | Solved | Cost per solved | 95% interval | Difference vs C | 95% interval | Solve-rate diff vs C (pp) | 95% interval |
+|---|---|---|---|---|---|---|---|---|
+| A Frontier for all | $201.25 | 158.0 | $1.274 | 1.110 to 1.471 | +0.509 | +0.403 to +0.631 | -11.28 | -15.04 to -7.52 |
+| B Cheaper for all | $28.23 | 149.0 | $0.189 | 0.165 to 0.219 | -0.575 | -0.708 to -0.461 | -14.66 | -19.17 to -10.53 |
+| C Cheaper first | $143.77 | 188.0 | $0.765 | 0.630 to 0.922 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| D Advisor | $144.03 | 187.9 | $0.766 | 0.632 to 0.924 | +0.002 | -0.000 to +0.004 | -0.02 | -0.06 to +0.00 |
+| E Repository-only | $143.77 | 188.0 | $0.765 | 0.630 to 0.922 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| F Existing-practice rule | $175.91 | 166.4 | $1.057 | 0.897 to 1.247 | +0.292 | +0.201 to +0.397 | -8.12 | -11.50 to -4.96 |
+| G Scrouting text head | $145.06 | 188.0 | $0.772 | 0.638 to 0.929 | +0.007 | -0.001 to +0.016 | +0.00 | +0.00 to +0.00 |
+| H Oracle (ceiling) | $128.97 | 188.0 | $0.686 | 0.566 to 0.826 | -0.079 | -0.097 to -0.063 | +0.00 | +0.00 to +0.00 |
+
+**Primary claim, Advisor against cheaper-first:** cost per solved task difference +0.002 (95% interval -0.000 to +0.004); interval wholly below zero: False. Solve-rate difference -0.02 pp (lower 95% bound -0.06); non-inferior (bound above -2 pp): True. Verdict under the protocol rule: **not supported**.
+
+Share of tasks sent straight to the frontier model: Advisor 0.3%, repository-only 0.0%, rule F 55.0%, Scrouting head 3.0%. Chosen C values (counts): 0.01: 11, 0.1: 9, 1.0: 70, 10.0: 10.
+
+## 2. Threshold sensitivity (Advisor)
+
+| θ | Spend | Solved | Cost per solved | Difference vs C | 95% interval | Solve-rate diff (pp) | lower bound |
+|---|---|---|---|---|---|---|---|
+| 0.3 | $144.50 | 187.6 | $0.770 | +0.005 | +0.002 to +0.010 | -0.13 | -0.26 |
+| 0.5 | $155.19 | 179.0 | $0.867 | +0.102 | +0.062 to +0.148 | -3.38 | -5.09 |
+| 0.7 | $197.02 | 159.5 | $1.235 | +0.470 | +0.370 to +0.587 | -10.71 | -14.42 |
+
+The primary θ is the training-fold cost ratio (about 0.14).
+
+## 3. Prediction of Kimi success (out-of-fold, scores averaged over repetitions)
+
+| Comparison | AUC (first) | AUC (second) | Difference | DeLong p |
+|---|---|---|---|---|
+| Advisor vs repository-only | 0.595 | 0.489 | +0.107 | 0.004 |
+| Advisor vs Scrouting text head | 0.595 | 0.523 | +0.073 | 0.138 |
+
+Brier score (lower is better): Advisor 0.2446, repository-only 0.2459, base rate 0.2464.
+With 266 tasks only a substantial gain in AUC is detectable (protocol section 9); a non-significant difference is not evidence of no effect.
+
+## 4. Leave-one-repository-out (secondary scheme)
+
+| Policy | Spend | Solved | Cost per solved | 95% interval | Difference vs C | 95% interval | Solve-rate diff vs C (pp) | 95% interval |
+|---|---|---|---|---|---|---|---|---|
+| A Frontier for all | $201.25 | 158.0 | $1.274 | 1.110 to 1.471 | +0.509 | +0.403 to +0.631 | -11.28 | -15.04 to -7.52 |
+| B Cheaper for all | $28.23 | 149.0 | $0.189 | 0.165 to 0.219 | -0.575 | -0.708 to -0.461 | -14.66 | -19.17 to -10.53 |
+| C Cheaper first | $143.77 | 188.0 | $0.765 | 0.630 to 0.922 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| D Advisor | $143.77 | 188.0 | $0.765 | 0.630 to 0.922 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| E Repository-only | $143.77 | 188.0 | $0.765 | 0.630 to 0.922 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| H Oracle (ceiling) | $128.97 | 188.0 | $0.686 | 0.566 to 0.826 | -0.079 | -0.097 to -0.063 | +0.00 | +0.00 to +0.00 |
+
+AUC pooled over held-out repositories: Advisor 0.497. Repository-only is undefined for an unseen repository and falls back to the training base rate.
+
+## 5. Label 100 (a separate check, never pooled; text form differs, so the shift is large)
+
+| Policy | Spend | Solved | Cost per solved | 95% interval | Difference vs C | 95% interval | Solve-rate diff vs C (pp) | 95% interval |
+|---|---|---|---|---|---|---|---|---|
+| A Frontier for all | $78.34 | 48.0 | $1.632 | 1.199 to 2.266 | +0.619 | +0.307 to +1.034 | -12.00 | -19.00 to -6.00 |
+| B Cheaper for all | $20.78 | 52.0 | $0.400 | 0.271 to 0.578 | -0.614 | -0.955 to -0.375 | -8.00 | -14.00 to -3.00 |
+| C Cheaper first | $60.81 | 60.0 | $1.013 | 0.670 to 1.509 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| D Advisor | $60.81 | 60.0 | $1.013 | 0.670 to 1.509 | +0.000 | +0.000 to +0.000 | +0.00 | +0.00 to +0.00 |
+| H Oracle (ceiling) | $47.37 | 60.0 | $0.789 | 0.534 to 1.155 | -0.224 | -0.364 to -0.125 | +0.00 | +0.00 to +0.00 |
+
+AUC against Kimi success on the 100 tasks: 0.478.
