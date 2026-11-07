@@ -16,6 +16,8 @@ AUC for predicting 'neither': Advisor-form classifier 0.632, repository-only 0.4
 
 Spend avoided and solves lost are reported separately and are not combined. Flagged tasks are assumed to be handled by the developer, whose time is not counted. A cutoff at which no task is flagged shows a precision of nan.
 
+*This file was produced by a single run of `analysis_exploratory.py` on 2026-11-07 and has not been modified since.*
+
 ## 2. Price-ratio sensitivity (post hoc)
 
 Actual average cost ratio (cheaper ÷ frontier) on these tasks: 0.140. For each ratio r the Kimi costs are scaled by r ÷ 0.140 and the routing threshold is r (send a task straight to the frontier model if the predicted chance of cheaper-model success is below r).
