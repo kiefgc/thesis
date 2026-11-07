@@ -258,6 +258,18 @@ li{margin:.25em 0}
 <td>The protocol named the embedding model and settings but not the precision, device or library versions, which affect the numbers slightly. Recording them makes the run repeatable.</td>
 <td>Secondary embedding variant only. No feature, label, threshold, metric or baseline changed.</td>
 </tr>
+<tr>
+<td>2 November 2026</td>
+<td>Clarifications entered before the first real run, for details the protocol left open: (1) the regularization strength C is chosen in the inner 5-fold cross-validation by mean log loss, with ties going to the smaller C; (2) non-inferiority in section 9 is judged by the lower 95% bound of the solve-rate difference from policy C being above -2 percentage points, not by the point estimate; (3) the policy results are averages over the 20 repetitions of the fold assignment, so a task can be partly routed to the frontier model, as in the baseline results. Code as reviewed: <code>advisor_common.py</code> <code>13A0315C3FB351D4D0740AFC7AFEE61C5C41EC30C7ED59205DEDAC5B1246C077</code>, <code>analysis_primary.py</code> <code>237DFB5B16842B9B672B94B3156C47B1D2BF446A27CF8F8C179B76AD6DA18647</code>, <code>analysis_secondary.py</code> <code>A28BC6F9683947D7578C35501BF2BE5A3B38898D89CBB1D93E3FC3EC46707E20</code>, <code>test_pipeline.py</code> <code>327E55DDE4CDBB55A7179F12A6B2D8FF77C2A9258874210FB9CC44E528095568</code>.</td>
+<td>The protocol named the procedure but not these three details, and they must be fixed before outcomes are analysed.</td>
+<td>Primary and secondary analyses (how C is chosen, how non-inferiority is judged, how the point estimates are formed). No feature, label, threshold, baseline or metric changed.</td>
+</tr>
+<tr>
+<td>2 November 2026</td>
+<td>Explicit exclusion: no measure taken from the finished solution is used as an input, including the number of files changed, patch size and test-derived fields. The Advisor works only with what a developer likely knows at the moment of delegation. The pre-run proxy for how much a task touches is the existing feature F4 (distinct code references in the issue text). Any later use of solution-derived measures would be a diagnostic and marked post hoc.</td>
+<td>Files touched is a strong correlate of task size, but it is known only after the fix and is absent for the 266 tasks of the main set. Stating the exclusion keeps the Advisor usable in practice and the comparison honest.</td>
+<td>None. This records a boundary that the protocol's definition of pre-run information already implied.</td>
+</tr>
 </tbody>
 </table></div>
 <h2>Sources</h2>
